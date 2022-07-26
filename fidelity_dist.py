@@ -1,6 +1,7 @@
+from multiprocessing.dummy import freeze_support
 from qutip import *
 import numpy as np
-import matplotlib.pyplot as plt
+from multiprocessing import Pool, cpu_count
 
 from mfplot import mfplot
 
@@ -12,7 +13,7 @@ omega_r = 1.0 * 2 * np.pi   # Resonator
 # Qubit-Resonator Coupling strength
 g_res = 0.5 * 2 * np.pi     # Coupling Strength
 # Random Telegraph Noise
-phase_fluc = 0.05              # The strength of 'random-phase' telegraph
+phase_fluc = 0.35              # The strength of 'random-phase' telegraph
 # Prob of RTN being 0,1
 tau_0 = 0.9
 tau_1 = 0.1
@@ -27,7 +28,18 @@ trial = 1000
 
 results_dir = "img/phase" + str(phase_fluc).replace('.', '-') + "/"
 
-for i in range(trial):
-    mfplot(results_dir, resonator_fock_num, omega_q, omega_r, g_res, phase_fluc,
-           tau_0, tau_1, isInterval, init_time, fin_time, rho0, i)
-    print(i)
+
+def main():
+
+    for i in range(trial):
+        parameter = [(results_dir, resonator_fock_num, omega_q, omega_r, g_res, phase_fluc,
+                     tau_0, tau_1, isInterval, init_time, fin_time, rho0, i)]
+        with Pool(processes=cpu_count()) as pool:
+            pool.starmap(mfplot, parameter)
+
+        print(i)
+
+
+if __name__ == '__main__':
+    freeze_support()
+    main()

@@ -5,7 +5,7 @@ import numpy as np
 # Time Vector
 times = np.linspace(0.0, 10.0, 2001)
 
-datapath = "img/fidelity_array/"
+datapath = "img/phase0-/fidelity_array/"
 
 trials = 10000
 

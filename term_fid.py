@@ -4,9 +4,11 @@ import numpy as np
 # Time Vector
 times = np.linspace(0.0, 10.0, 2001)
 
-datapath = "img/fidelity_array/"
+phase = 0.1
 
-trials = 10000
+datapath = "img/phase" + str(phase).replace('.', '-') + "/fidelity_array/"
+
+trials = 1000
 
 term_fid = [0 for i in range(2001)]
 min_fid = [100000 for i in range(2001)]
@@ -36,10 +38,5 @@ min_fid_axes.legend(loc=0)
 min_fid_axes.set_xlabel('Time')
 min_fid_axes.set_ylabel('Fidelity')
 
-plt.savefig("fidelity_result.png")
+plt.savefig("fidelity_result" + str(phase).replace('.', '-') + ".png")
 plt.cla()
-
-plt.hist(term_fid, bins=12)
-plt.gca().set(title='Frequency Histogram', ylabel='Frequency')
-
-plt.savefig("dist_term.png")

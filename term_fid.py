@@ -4,7 +4,7 @@ import numpy as np
 # Time Vector
 times = np.linspace(0.0, 10.0, 2001)
 
-phase = 0.1
+phase = 0.55
 
 datapath = "img/phase" + str(phase).replace('.', '-') + "/fidelity_array/"
 
@@ -24,6 +24,8 @@ for tr in range(trials):
 
 term_fid_np = np.array([t / trials for t in term_fid])
 min_fid_np = np.array(min_fid)
+
+print(term_fid_np[-1])
 
 fig, (term_fid_axes, min_fid_axes) = plt.subplots(2, 1, figsize=(10, 10))
 

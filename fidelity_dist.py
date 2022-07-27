@@ -13,7 +13,7 @@ omega_r = 1.0 * 2 * np.pi   # Resonator
 # Qubit-Resonator Coupling strength
 g_res = 0.5 * 2 * np.pi     # Coupling Strength
 # Random Telegraph Noise
-phase_fluc = 0.35              # The strength of 'random-phase' telegraph
+phase_fluc = 0.55           # The strength of 'random-phase' telegraph
 # Prob of RTN being 0,1
 tau_0 = 0.9
 tau_1 = 0.1

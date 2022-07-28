@@ -28,7 +28,7 @@ times = np.linspace(0.0, 10.0, 2001)
 
 fid_at_time = np.loadtxt("fid_at_time.txt")
 
-fig, ax = plt.subplots(figsize=(20, 20))
+fig, ax = plt.subplots(figsize=(8, 8))
 
 
 def pm_hist(idx):
@@ -36,7 +36,7 @@ def pm_hist(idx):
     ax.hist(fid_at_time[idx], weights=weights,
             bins=np.arange(0, 1.0 + 0.005, 0.005))
     plt.gca().set(
-        title=f'Frequency Histogram at time t={times[idx]}', ylabel='Frequency')
+        title=f'Frequency Histogram at time t={times[idx]:.2f}', ylabel='Frequency')
     ax.set_ylim([0, 0.4])
 
 
@@ -74,8 +74,8 @@ def pdf(loc, scale, resize=False):
 # --- Setting of the graph / animation
 
 
-with_hist = False
-resize = False
+with_hist = True
+resize = True
 
 
 # ---------- Fidelity Distribution
@@ -93,10 +93,10 @@ def fidelity_distribution(frame_no):
 
     if not resize:
         plt.gca().set(
-            title=f'Probability density curve at time t={times[frame_no]}')
+            title=f'Probability density curve at time t={times[frame_no]:.2f}')
     else:
         plt.gca().set(
-            title=f'Probability density curve (scaled to fit histogram) at time t={times[frame_no]}')
+            title=f'Probability density curve (scaled to fit histogram) at time t={times[frame_no]:.2f}')
 
 
 # ---------- Histogram Animation
@@ -110,17 +110,17 @@ def fidelity_distribution(frame_no):
 # ---------- PDF with Histogram Animation
 
 
-anim = FuncAnimation(fig, fidelity_distribution, frames=range(4, 2000, 4),
-                     interval=25, repeat=False)
-anim.save("fid_pdf.gif", savefig_kwargs={'facecolor': 'white'})
+# anim = FuncAnimation(fig, fidelity_distribution, frames=range(4, 2000, 4),
+#                      interval=200, repeat=False)
+# anim.save("fid_Hist_pdf_slow.gif", savefig_kwargs={'facecolor': 'white'})
 
 
 # ---------- Plot and Save/Show
 
 
-# t = 7.5         # Time 0 <= t <= 10
-# fidelity_distribution(int(t * 200))
+t = 3.2         # Time 0 <= t <= 10
+fidelity_distribution(int(t * 200))
 
-# plt.savefig(f"fid_dist_t={t}.png")
+plt.savefig(f"fid_dist_t={t}.png")
 
 # plt.show()

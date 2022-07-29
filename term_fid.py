@@ -4,14 +4,18 @@ import numpy as np
 # Time Vector
 times = np.linspace(0.0, 10.0, 2001)
 
+# Phase Fluctuation
 phase = 0.55
 
 datapath = "img/phase" + str(phase).replace('.', '-') + "/fidelity_array/"
 
+# Number of trial
 trials = 1000
 
 term_fid = [0 for i in range(2001)]
 min_fid = [100000 for i in range(2001)]
+
+# Load the data of all trials and find average fidelity and minimum fidelity
 
 for tr in range(trials):
     tmp = np.loadtxt(datapath + str(tr) + ".txt")
@@ -19,13 +23,11 @@ for tr in range(trials):
     for i in range(2001):
         term_fid[i] = term_fid[i] + tmp[i]
         min_fid[i] = min_fid[i] if min_fid[i] < tmp[i] else tmp[i]
-        # if tr == 0:
-        #     print(tr, i, tmp[i], term_fid[i], min_fid[i])
 
 term_fid_np = np.array([t / trials for t in term_fid])
 min_fid_np = np.array(min_fid)
 
-print(term_fid_np[-1])
+# Plot the graph
 
 fig, (term_fid_axes, min_fid_axes) = plt.subplots(2, 1, figsize=(10, 10))
 

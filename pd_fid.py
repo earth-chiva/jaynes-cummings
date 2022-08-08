@@ -110,17 +110,17 @@ def fidelity_distribution(frame_no):
 # ---------- PDF with Histogram Animation
 
 
-# anim = FuncAnimation(fig, fidelity_distribution, frames=range(4, 2000, 4),
-#                      interval=200, repeat=False)
-# anim.save("fid_Hist_pdf_slow.gif", savefig_kwargs={'facecolor': 'white'})
+anim = FuncAnimation(fig, fidelity_distribution, frames=range(4, 2000, 4),
+                     interval=150, repeat=False)
+anim.save("fid_Hist_pdf_slow.gif", savefig_kwargs={'facecolor': 'white'})
 
 
 # ---------- Plot and Save/Show
 
 
-t = 3.2         # Time 0 <= t <= 10
-fidelity_distribution(int(t * 200))
+# t = 3.2         # Time 0 <= t <= 10
+# fidelity_distribution(int(t * 200))
 
-plt.savefig(f"fid_dist_t={t}.png")
+# plt.savefig(f"fid_dist_t={t}.png")
 
-# plt.show()
+# # plt.show()
